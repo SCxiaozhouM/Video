@@ -84,21 +84,42 @@
     }
 
 
+    /*@@media (max-width: 768px) {
+        .col-md-1-5 {
+            max-width: 33.3333%;
+        }
 
-    @@media (min-width: 768px) {
         .col-sm-1-5 {
-            max-width: 20%;
+            max-width: 33.3333%;
+        }
+    }*/
+    
+    @@media (min-width: 768px) {
+        .col-md-1-5 {
+            max-width: 25%;
+        }
+
+        .col-sm-1-5 {
+            max-width: 25%;
         }
     }
 
     @@media (min-width: 992px) {
         .col-md-1-5 {
             max-width: 20%;
+            
+        }
+        .col-sm-1-5 {
+            max-width: 20%;
         }
     }
+    
 
     @@media (min-width: 1200px) {
-        .col-lg-1-5 {
+        .col-md-1-5 {
+            max-width: 16.666667%;
+        }
+        .col-sm-1-5 {
             max-width: 20%;
         }
     }
@@ -173,7 +194,7 @@
 
             @for (int i = 0; i < 10; i++)
             {
-            <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
+            <div class="col-sm-1-5 col-sm-3 col-xl-2 col-xs-4">
                 <!---col-md-1-5-->
                 <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
                     <span class="play hidden-xs"></span>

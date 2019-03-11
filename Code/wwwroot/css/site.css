@@ -21,8 +21,12 @@ button {
   }
 }
 @media (max-width: 768px) {
+    .search_div  {
+      
+    }
     .search_div form {
         padding: 5px 20px;
+
     }
         .search_div form button {
             right: 8% !important;
