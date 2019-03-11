@@ -1,0 +1,101 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+button {
+    box-shadow: none !important;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+@media (max-width: 768px) {
+    .search_div form {
+        padding: 5px 20px;
+    }
+        .search_div form button {
+            right: 8% !important;
+           
+        }
+}
+
+.search_div form {
+    padding-top: 5px;
+    position: relative;
+}
+    .search_div form input {
+        padding-right: 40px !important;
+        float: right;
+    }
+    .search_div form button {
+        position: absolute;
+        background-color: transparent;
+        right: 0;
+        top: 5%;
+    }
+.form-control{
+    width:70% !important;
+}
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+.search_div{
+    right:0;
+    top:0;
+}
+
+.carousel-item img {
+    width: 100% !important;
+}
+
+@media screen and (max-width: 768px) {
+    .col-xs-4 {
+        width:33%;
+    }
+}
+
