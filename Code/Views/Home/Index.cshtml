@@ -1,13 +1,22 @@
-﻿@{
+﻿@model List<Code.EntityFramework.Entity.Banner>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<partial name="view_pager" />
+<partial name="view_pager" model='@Model' />
 
 <style>
     /*.row div {
         border: 1px solid #000000;
     }*/
+    #view_pager .carousel-indicators {
+        bottom: -10px !important;
+    }
+    #view_pager .active .carousel-indicators {
+        bottom: 10px !important;
+        color:#fff;
+    }
+
     .viode_header {
         margin-top: 15px;
         margin-bottom: 5px;
@@ -67,9 +76,13 @@
         }
     }
 
-    .col-xl-9, .col-xl-3 {
+    .col-xl-9 {
         padding-left: 0 !important;
         padding-right: 0 !important;
+    }
+    .col-xl-3 {
+        padding-right: 0 !important;
+        padding-left: 8px;
     }
 
     .col-xs-1-5,
@@ -141,6 +154,29 @@
         text-overflow: ellipsis;
         width: 100%;
     }
+    .li_one:nth-child(0){
+        display:inline-block;
+    }
+    .num {
+        position: absolute;
+        padding: 0px 9px;
+        border-bottom-right-radius: 8px;
+        border-top-right-radius: 8px;
+        font-weight: 500;
+        color: #999;
+    }
+    .right_title {
+        margin-left: 13%;
+    }
+    .recommend li{
+        margin:10px 0px;
+        font-size:14px;
+    }
+    .one_re{
+        position:absolute;
+        margin-left:7px;
+        display:inline-block;
+    }
 </style>
 
 <div class="new">
@@ -207,21 +243,39 @@
         </div>
         <div class="col-xl-3 d-none d-xl-block">
             <div class="viode_header">
-                <div class=" col-xl-9">最近更新<span class="float-right"><a href="#">更多>></a></span></div>
+                <div class="">电影<span class="float-right"><a href="#">更多>></a></span></div>
             </div>
-            <div>
+            <div class="recommend">
                 <ul>
-                    <li>
+                    <li class="li_one">
+                        <div class="num" style="color:#fff;background-color:#ff3000;">1</div>
                         <a class="video_a" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: inline-block; width:70px"></a>
-                        <span class="position-absolute">
+                        <div class="one_re">
                             <a href="#">不吉波普不笑</a>
-                            <div>类型：动作片</div><div>地区：内地</div>
+                            <div>类型：动作片</div>
+                            <div>地区：内地</div>
                             <div>演员：xxx、xxx、xxx、xxx</div>
-                        </span>
+                        </div>
                     </li>
+                    <li>
+                        <div class="num" style="color:#fff;background-color:#ff6000;">2</div>
+                        <span class="right_title">不吉波普不笑</span>
+                    </li>
+                    <li>
+                        <div class="num" style="color:#fff;background-color:#ffb400;">3</div>
+                        <span class="right_title">不吉波普不笑</span>
+                    </li>
+                    @for (int i = 4; i < 11; i++)
+                    {
+                        <li>
+                            <div class="num">@i</div>
+                            <span class="right_title">不吉波普不笑</span>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
+
     </div>
 </div>
 
