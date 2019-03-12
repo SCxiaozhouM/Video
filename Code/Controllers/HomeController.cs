@@ -21,9 +21,12 @@ namespace Code.Controllers
             using (var conn = new MySqlConnection(SqlConn))
             {
                 var sql_banner = @"select * from banner";
+                var sql_new = "select * from video order by update_time desc limit 0,10";
+                var newList = conn.Query<Video>(sql_new);
                 var bannerList = conn.Query<Banner>(sql_banner);
                 ViewBag.BannerList = bannerList;
-                return View(bannerList);
+                ViewBag.NewList = newList;
+                return View();
             }
                
         }

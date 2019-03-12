@@ -12,9 +12,10 @@
     #view_pager .carousel-indicators {
         bottom: -10px !important;
     }
+
     #view_pager .active .carousel-indicators {
-        bottom: 10px !important;
-        color:#fff;
+        bottom: 15px !important;
+        color: #fff;
     }
 
     .viode_header {
@@ -33,26 +34,24 @@
             height: 180px;
         }
 
-        .row div a {
-            background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190308/203c4a92f4845267.jpg&quot;) 50% 50% / cover no-repeat;
-            display: block;
-        }
-
     .vide_a .play {
         display: none;
         position: absolute;
         top: 0;
+        left: -5px;
         z-index: 1;
         width: 100%;
         height: 100%;
         background: rgba(0,0,0,.3) url("../../image/play.png") center no-repeat;
     }
-
-    .vide_a {
+    .vide_a:hover .play {
         display: block;
-        position: relative;
-        padding-top: 130%;
     }
+        .vide_a {
+            display: block;
+            position: relative;
+            padding-top: 130%;
+        }
 
         .vide_a span {
             left: 1%;
@@ -80,6 +79,7 @@
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
+
     .col-xl-3 {
         padding-right: 0 !important;
         padding-left: 8px;
@@ -114,10 +114,12 @@
         .col-md-1-5 {
             max-width: 16.666667%;
         }
+
         .col-sm-1-5 {
             max-width: 20%;
         }
     }
+
     .video_a {
         padding-top: 100px;
     }
@@ -148,15 +150,18 @@
         display: inline-block;
         margin-top: -3px;
     }
+
     .text-overflow {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         width: 100%;
     }
-    .li_one:nth-child(0){
-        display:inline-block;
+
+    .li_one:nth-child(0) {
+        display: inline-block;
     }
+
     .num {
         position: absolute;
         padding: 0px 9px;
@@ -165,17 +170,27 @@
         font-weight: 500;
         color: #999;
     }
+
     .right_title {
         margin-left: 13%;
     }
-    .recommend li{
-        margin:10px 0px;
-        font-size:14px;
+
+    .recommend li {
+        margin: 10px 0px;
+        font-size: 14px;
     }
-    .one_re{
-        position:absolute;
-        margin-left:7px;
-        display:inline-block;
+
+    .one_re {
+        position: absolute;
+        margin-left: 7px;
+        display: inline-block;
+    }
+
+    .banner_Pic {
+        background-position: 50% 50% !important;
+        background-size: cover !important;
+        display: block;
+        padding-top: 41%;
     }
 </style>
 
@@ -185,19 +200,20 @@
 
         @for (int i = 0; i < 10; i++)
         {
-           
-            var clas = i > 5 && i <= 7 ? "d-none d-sm-block  d-xl-none" : i > 7 && i <= 9 ? "d-none d-lg-block d-xl-none" : "";
 
-            <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4 @clas ">
-                <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
+            var clas = i > 5 && i <= 7 ? "d-none d-sm-block  d-xl-none" : i > 7 && i <= 9 ? "d-none d-lg-block d-xl-none" : "";
+            var item = ViewBag.NewList[i];
+            <div class="col-md-1-5 col-sm-play col-xl-2 col-xs-4 @clas ">
+                <a class="vide_a lazy" href="/dm/41739/" title="@item.Name.Replace("影片名称: ", "")" data-original="@item.Pic_address" style="background: url(&quot;@item.Pic_address&quot;) 50% 50% / cover no-repeat; display: block;">
                     <span class="play hidden-xs"></span>
-                    <span class="note textbg">更新至15集</span>
+                    <span class="note textbg">@item.Move_mark.Replace("影片备注: ", "")</span>
                 </a>
                 <div class="xia">
-                    <span class="title text-overflow"><a href="#">英雄诀</a></span>
-                    <span class="actor text-overflow d-none d-md-block">宁静,张睿,吕良伟,杜志国睿,吕良伟,杜志国</span>
+                    <span class="title text-overflow"><a href="#">@item.Move_name.Replace("影片名称: ", "")</a></span>
+                    <span class="actor text-overflow d-none d-md-block">@item.Move_star.Replace("影片主演: ", "")</span>
                 </div>
             </div>
+
 
         }
     </div>
@@ -210,22 +226,23 @@
                 <span>最近更新<span class="float-right"><a href="#">更多>></a></span></span>
             </div>
 
-            @for (int i = 0; i < 10; i++)
+            @for (int i = 0; i < ViewBag.NewList.Count; i++)
             {
-            <div class="col-sm-1-5 col-sm-3 col-xl-2 col-xs-4">
-                <!---col-md-1-5-->
-                <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                    <span class="play hidden-xs"></span>
-                    <span class="note textbg">更新至15集</span>
-                </a>
-                <div class="xia">
-                    <span class="title text-overflow"><a href="#">英雄诀</a></span>
-                    <span class="actor text-overflow d-none d-md-block">宁静,张睿,吕良伟,杜志国睿,吕良伟,杜志国</span>
+                var item = ViewBag.NewList[i];
+                <div class="col-sm-1-5 col-sm-3 col-xl-2 col-xs-4">
+                    <!---col-md-1-5-->
+                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="@item.Pic_address" style="background: url(&quot;@item.Pic_address&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <span class="play hidden-xs"></span>
+                        <span class="note textbg">更新至15集</span>
+                    </a>
+                    <div class="xia">
+                        <span class="title text-overflow"><a href="#">英雄诀</a></span>
+                        <span class="actor text-overflow d-none d-md-block">宁静,张睿,吕良伟,杜志国睿,吕良伟,杜志国</span>
+                    </div>
                 </div>
-            </div>
             }
 
-            
+
             <div class="col-sm-1-5 col-sm-3 col-xl-2 col-xs-4 d-block d-lg-none">
                 <!---col-md-1-5-->
                 <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
