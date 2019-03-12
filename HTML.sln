@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "reptile", "reptile\reptile.csproj", "{27E88868-424F-4FBB-8CC3-8C166E6C32B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code", "Code\Code.csproj", "{81285976-822D-42BE-81EA-35FD934CA19E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Code", "Code\Code.csproj", "{81285976-822D-42BE-81EA-35FD934CA19E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
