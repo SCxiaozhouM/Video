@@ -1,4 +1,4 @@
-﻿@model List<Code.EntityFramework.Entity.Banner>
+﻿@model Dictionary<string, IEnumerable<Code.EntityFramework.Entity.Video>>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -44,14 +44,16 @@
         height: 100%;
         background: rgba(0,0,0,.3) url("../../image/play.png") center no-repeat;
     }
+
     .vide_a:hover .play {
         display: block;
     }
-        .vide_a {
-            display: block;
-            position: relative;
-            padding-top: 130%;
-        }
+
+    .vide_a {
+        display: block;
+        position: relative;
+        padding-top: 130%;
+    }
 
         .vide_a span {
             left: 1%;
@@ -101,6 +103,12 @@
     @@media (min-width: 768px) {
         .col-sm-1-5 {
             max-width: 25%;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .hidden-xs {
+            display: none !important;
         }
     }
 
@@ -192,6 +200,22 @@
         display: block;
         padding-top: 41%;
     }
+
+    .carousel-indicators li {
+        width: 15px !important;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+    .title a {
+        color: #333;
+    }
 </style>
 
 <div class="new">
@@ -203,14 +227,14 @@
 
             var clas = i > 5 && i <= 7 ? "d-none d-sm-block  d-xl-none" : i > 7 && i <= 9 ? "d-none d-lg-block d-xl-none" : "";
             var item = ViewBag.NewList[i];
-            <div class="col-md-1-5 col-sm-play col-xl-2 col-xs-4 @clas ">
-                <a class="vide_a lazy" href="/dm/41739/" title="@item.Name.Replace("影片名称: ", "")" data-original="@item.Pic_address" style="background: url(&quot;@item.Pic_address&quot;) 50% 50% / cover no-repeat; display: block;">
+            <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4 @clas ">
+                <a class="vide_a lazy" href="/dm/41739/" title="@item.Name" data-original="@item.Img" style="background: url(&quot;@item.Img&quot;) 50% 50% / cover no-repeat; display: block;">
                     <span class="play hidden-xs"></span>
-                    <span class="note textbg">@item.Move_mark.Replace("影片备注: ", "")</span>
+                    <span class="note textbg">@item.Remark</span>
                 </a>
                 <div class="xia">
-                    <span class="title text-overflow"><a href="#">@item.Move_name.Replace("影片名称: ", "")</a></span>
-                    <span class="actor text-overflow d-none d-md-block">@item.Move_star.Replace("影片主演: ", "")</span>
+                    <span class="title text-overflow"><a href="#">@item.Name</a></span>
+                    <span class="actor text-overflow d-none d-md-block">@item.Star</span>
                 </div>
             </div>
 
@@ -219,80 +243,86 @@
     </div>
 </div>
 
-<div class="new">
-    <div class="row">
-        <div class="col-xl-9">
-            <div class="viode_header">
-                <span>最近更新<span class="float-right"><a href="#">更多>></a></span></span>
-            </div>
 
-            @for (int i = 0; i < ViewBag.NewList.Count; i++)
-            {
-                var item = ViewBag.NewList[i];
-                <div class="col-sm-1-5 col-sm-3 col-xl-2 col-xs-4">
+@foreach (var item in Model)
+{
+    <div class="new">
+        <div class="row">
+            <div class="col-xl-9">
+                <div class="viode_header">
+                    <span>@item.Key<span class="float-right"><a href="#">更多>></a></span></span>
+                </div>
+                @{int n = 0;}
+                @foreach (var movie in item.Value)
+                {
+                    var clas = n > 9? "d-block d-lg-none":"";
+                    <div class="col-sm-1-5 col-sm-3 col-xl-2 col-xs-4 @clas">
+                        <!---col-md-1-5-->
+                        <a class="vide_a lazy" href="" title="不吉波普不笑" data-original="@movie.Img" style="background: url(&quot;@movie.Img&quot;) 50% 50% / cover no-repeat; display: block;">
+                            <span class="play hidden-xs"></span>
+                            <span class="note textbg">@movie.Remark</span>
+                        </a>
+                        <div class="xia">
+                            <span class="title text-overflow"><a href="#">@movie.Name</a></span>
+                            <span class="actor text-overflow d-none d-md-block">@movie.Star</span>
+                        </div>
+                    </div>
+                    n++;
+                }
+
+                
+
+                @*<div class="col-sm-1-5 col-sm-3 col-xl-2 col-xs-4 d-block d-lg-none">
                     <!---col-md-1-5-->
-                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="@item.Pic_address" style="background: url(&quot;@item.Pic_address&quot;) 50% 50% / cover no-repeat; display: block;">
+                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
                         <span class="play hidden-xs"></span>
                         <span class="note textbg">更新至15集</span>
                     </a>
-                    <div class="xia">
-                        <span class="title text-overflow"><a href="#">英雄诀</a></span>
-                        <span class="actor text-overflow d-none d-md-block">宁静,张睿,吕良伟,杜志国睿,吕良伟,杜志国</span>
-                    </div>
                 </div>
-            }
-
-
-            <div class="col-sm-1-5 col-sm-3 col-xl-2 col-xs-4 d-block d-lg-none">
-                <!---col-md-1-5-->
-                <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                    <span class="play hidden-xs"></span>
-                    <span class="note textbg">更新至15集</span>
-                </a>
-            </div>
-            <div class="col-sm-1-5 col-sm-3 col-xl-2 col-xs-4  d-block d-lg-none">
-                <!---col-md-1-5-->
-                <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                    <span class="play hidden-xs"></span>
-                    <span class="note textbg">更新至15集</span>
-                </a>
+                <div class="col-sm-1-5 col-sm-3 col-xl-2 col-xs-4  d-block d-lg-none">
+                    <!---col-md-1-5-->
+                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <span class="play hidden-xs"></span>
+                        <span class="note textbg">更新至15集</span>
+                    </a>
+                </div>*@
             </div>
         </div>
-        <div class="col-xl-3 d-none d-xl-block">
-            <div class="viode_header">
-                <div class="">电影<span class="float-right"><a href="#">更多>></a></span></div>
-            </div>
-            <div class="recommend">
-                <ul>
-                    <li class="li_one">
-                        <div class="num" style="color:#fff;background-color:#ff3000;">1</div>
-                        <a class="video_a" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: inline-block; width:70px"></a>
-                        <div class="one_re">
-                            <a href="#">不吉波普不笑</a>
-                            <div>类型：动作片</div>
-                            <div>地区：内地</div>
-                            <div>演员：xxx、xxx、xxx、xxx</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="num" style="color:#fff;background-color:#ff6000;">2</div>
-                        <span class="right_title">不吉波普不笑</span>
-                    </li>
-                    <li>
-                        <div class="num" style="color:#fff;background-color:#ffb400;">3</div>
-                        <span class="right_title">不吉波普不笑</span>
-                    </li>
-                    @for (int i = 4; i < 11; i++)
-                    {
-                        <li>
-                            <div class="num">@i</div>
-                            <span class="right_title">不吉波普不笑</span>
-                        </li>
-                    }
-                </ul>
-            </div>
-        </div>
-
     </div>
-</div>
+}
 
+
+@*<div class="col-xl-3 d-none d-xl-block">
+        <div class="viode_header">
+            <div class="">电影<span class="float-right"><a href="#">更多>></a></span></div>
+        </div>
+        <div class="recommend">
+            <ul>
+                <li class="li_one">
+                    <div class="num" style="color:#fff;background-color:#ff3000;">1</div>
+                    <a class="video_a" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: inline-block; width:70px"></a>
+                    <div class="one_re">
+                        <a href="#">不吉波普不笑</a>
+                        <div>类型：动作片</div>
+                        <div>地区：内地</div>
+                        <div>演员：xxx、xxx、xxx、xxx</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="num" style="color:#fff;background-color:#ff6000;">2</div>
+                    <span class="right_title">不吉波普不笑</span>
+                </li>
+                <li>
+                    <div class="num" style="color:#fff;background-color:#ffb400;">3</div>
+                    <span class="right_title">不吉波普不笑</span>
+                </li>
+                @for (int i = 4; i < 11; i++)
+                {
+                    <li>
+                        <div class="num">@i</div>
+                        <span class="right_title">不吉波普不笑</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>*@
