@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Code.EntityFramework.Entity
 {
-    public class Video
+    public class movie_list
     {
         public int Id { get; set; }
         /// <summary>
@@ -36,12 +36,12 @@ namespace Code.EntityFramework.Entity
         /// <summary>
         /// 类型
         /// </summary>
-        public string Type { get; set; }
+        public string Types { get; set; }
 
         /// <summary>
         /// 地区
         /// </summary>
-        public string Reigion { get; set; }
+        public string Region { get; set; }
 
         /// <summary>
         /// 语言

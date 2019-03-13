@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Code.EntityFramework.Entity
 {
-    public class Banner
+    public class movie_banner
     {
         public string Name { get; set; }
         public string Url { get; set; }
