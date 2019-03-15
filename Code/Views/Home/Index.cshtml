@@ -193,9 +193,11 @@
         margin-left: 7px;
         display: inline-block;
     }
-    .one_re a{
-        color:#333;
-    }
+
+        .one_re a {
+            color: #333;
+        }
+
     .banner_Pic {
         background-position: 50% 50% !important;
         background-size: cover !important;
@@ -229,18 +231,28 @@
 
             var clas = i > 5 && i <= 7 ? "d-none d-sm-block  d-xl-none" : i > 7 && i <= 9 ? "d-none d-lg-block d-xl-none" : "";
             var item = ViewBag.NewList[i];
+            var typep = (int)item.Type_Id;
             <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4 @clas ">
-                <a class="vide_a lazy" href="/dm/41739/" title="@item.Name" data-original="@item.Img" style="background: url(&quot;@item.Img&quot;) 50% 50% / cover no-repeat; display: block;">
+                @{
+                    var type = SugarBase.DB.Queryable<Code.EntityFramework.Entity.mac_type>().First(o => o.Type_Id == typep);
+                    string en = type.Type_En;
+                    if (type.type_Pid != 0)
+                    {
+                        en = SugarBase.DB.Queryable<Code.EntityFramework.Entity.mac_type>().First(o => o.Type_Id == type.type_Pid).Type_En + "/" + en;
+                    }
+
+                    en = en + "/" + item.Vod_Id + ".html";
+                }
+
+                <a class="vide_a lazy" href="@en" title="@item.Vod_Name" data-original="@item.Vod_Pic" style="background: url(&quot;@item.Vod_Pic&quot;) 50% 50% / cover no-repeat; display: block;">
                     <span class="play hidden-xs"></span>
-                    <span class="note textbg">@item.Remark</span>
+                    <span class="note textbg">@item.Vod_Remarks</span>
                 </a>
                 <div class="xia">
-                    <span class="title text-overflow"><a href="#">@item.Name</a></span>
-                    <span class="actor text-overflow d-none d-md-block">@item.Star</span>
+                    <span class="title text-overflow"><a href="@en">@item.Vod_Name</a></span>
+                    <span class="actor text-overflow d-none d-md-block">@item.Vod_Actor</span>
                 </div>
             </div>
-
-
         }
     </div>
 </div>
@@ -255,39 +267,32 @@
                     <span>@item.Key<span class="float-right"><a href="#">更多>></a></span></span>
                 </div>
                 @{int n = 0;}
+
                 @foreach (var movie in item.Value.list)
                 {
                     var clas = n > 9 ? "d-block d-lg-none" : "";
+                    var typep = (int)movie.Type_Id;
+                    var type = SugarBase.DB.Queryable<Code.EntityFramework.Entity.mac_type>().First(o => o.Type_Id == typep);
+                    string en = type.Type_En;
+                    if (type.type_Pid != 0)
+                    {
+                        en = SugarBase.DB.Queryable<Code.EntityFramework.Entity.mac_type>().First(o => o.Type_Id == type.type_Pid).Type_En + "/" + en;
+                    }
+
+                    en = en + "/" + movie.Vod_Id + ".html";
                     <div class="col-sm-1-5 col-sm-3 col-xl-2 col-xs-4 @clas">
                         <!---col-md-1-5-->
-                        <a class="vide_a lazy" href="" title="不吉波普不笑" data-original="@movie.Img" style="background: url(&quot;@movie.Img&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <a class="vide_a lazy" href="@en" title="不吉波普不笑" data-original="@movie.Vod_Pic" style="background: url(&quot;@movie.Vod_Pic&quot;) 50% 50% / cover no-repeat; display: block;">
                             <span class="play hidden-xs"></span>
-                            <span class="note textbg">@movie.Remark</span>
+                            <span class="note textbg">@movie.Vod_Remarks</span>
                         </a>
                         <div class="xia">
-                            <span class="title text-overflow"><a href="#">@movie.Name</a></span>
-                            <span class="actor text-overflow d-none d-md-block">@movie.Star</span>
+                            <span class="title text-overflow"><a href="@en">@movie.Vod_Name</a></span>
+                            <span class="actor text-overflow d-none d-md-block">@(movie.Vod_Actor != "" ? movie.Vod_Actor : "#")</span>
                         </div>
                     </div>
                     n++;
                 }
-
-
-
-                @*<div class="col-sm-1-5 col-sm-3 col-xl-2 col-xs-4 d-block d-lg-none">
-                <!---col-md-1-5-->
-                <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                    <span class="play hidden-xs"></span>
-                    <span class="note textbg">更新至15集</span>
-                </a>
-            </div>
-            <div class="col-sm-1-5 col-sm-3 col-xl-2 col-xs-4  d-block d-lg-none">
-                <!---col-md-1-5-->
-                <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                    <span class="play hidden-xs"></span>
-                    <span class="note textbg">更新至15集</span>
-                </a>
-            </div>*@
             </div>
             <div class="col-xl-3 d-none d-xl-block">
                 <div class="viode_header">
@@ -302,26 +307,24 @@
                             {
                                 <li class="li_one">
                                     <div class="num" style="color:#fff;background-color:#ff3000;">@(p + 1)</div>
-                                    <a class="video_a" href="/dm/41739/" title="@moviep.Name" data-original="@moviep.Img" style="background: url(&quot;@moviep.Img&quot;) 50% 50% / cover no-repeat; display: inline-block; width:70px"></a>
+                                    <a class="video_a" href="/dm/41739/" title="@moviep.Vod_Name" data-original="@moviep.Vod_Pic" style="background: url(&quot;@moviep.Vod_Pic&quot;) 50% 50% / cover no-repeat; display: inline-block; width:70px"></a>
                                     <div class="one_re">
-                                        <a href="#">@moviep.Name</a>
-                                        <div>类型：@moviep.Types</div>
-                                        <div>地区：@moviep.Region</div>
-                                        <div>演员：@moviep.Star</div>
+                                        <a href="#">@moviep.Vod_Name</a>
+                                        <div>类型：@moviep.Vod_Class</div>
+                                        <div>地区：@moviep.Vod_Area</div>
+                                        <div>演员：@moviep.Vod_Actor</div>
                                     </div>
                                 </li>
                             }
                             else
                             {
-                                var sty = p == 1 ? "color:#fff;background-color:#ff6000;" : p==2? "color:#fff;background-color:#ffb400;":"";
-
+                                var sty = p == 1 ? "color:#fff;background-color:#ff6000;" : p == 2 ? "color:#fff;background-color:#ffb400;" : "";
                                 <li>
                                     <div class="num" style="@sty">@(p + 1)</div>
-                                    <span class="right_title">@moviep.Name</span>
+                                    <span class="right_title">@moviep.Vod_Name</span>
                                 </li>
                             }
                             p++;
-
                         }
                     </ul>
                 </div>

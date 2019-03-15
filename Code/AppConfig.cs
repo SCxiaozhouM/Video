@@ -7,7 +7,7 @@ namespace Code
 {
     public class AppConfig
     {
-        public static string SqlConn = "server=129.204.49.164;User Id=root;password=zwl1316123.;Database=movies;";
+        public static string SqlConn = "server=129.204.49.164;User Id=movie_tchfans_c;password=zwl1316123.;Database=movie_tchfans_c;";
 
     }
 }
