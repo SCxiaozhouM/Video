@@ -1,0 +1,136 @@
+﻿@{
+    ViewData["Title"] = "";
+}
+<style>
+    .row div {
+        /*border:1px solid #000;*/
+    }
+
+    .header_div {
+        display: table-cell;
+        vertical-align: top;
+    }
+
+        .header_div img {
+            width: 100%;
+        }
+
+        .header_div a {
+            position: relative;
+            width: 194px;
+            display: block;
+            color: #fff;
+        }
+
+    .textbg {
+        position: absolute;
+        bottom: 0px;
+        right: 3px;
+    }
+
+    .header_left div {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+    .header_left {
+        display: table-cell;
+        vertical-align: top;
+        padding-left: 20px;
+    }
+
+    .left {
+        margin: 0px;
+    }
+
+    .d_name {
+        font-size: 18px !important;
+        margin-top: 30px;
+    }
+
+    button {
+        margin-top: 20px;
+    }
+
+    li .active {
+        border: 0;
+        background: none;
+        border-bottom: 2px solid #09BB07;
+        color: #09BB07;
+    }
+    .nav-link{
+        color:#000;
+    }
+    ul {
+        border-bottom: 2px solid #eee;
+    }
+</style>
+<div class="row">
+    <div class="col-lg-9">
+
+        <div class="d_header">
+            <div class="header_div">
+                <a class="" href="#" title="">
+                    <img src="http://oss.liudehen.com/uploads/allimg/190321/129576f38b4f3441.jpg" />
+                    <span class="play hidden-xs"></span>
+                    <span class="textbg">HD</span>
+                </a>
+            </div>
+            <div class="header_left">
+                <div class="d_name">
+                    扶摇
+                </div>
+                <div class="d_actor">
+                    <span>主演：</span>萨布丽娜 科恩  卡罗琳·赫尼塞
+                </div>
+                <div class="d_director">
+                    <span>导演：</span>达伦·林恩·鲍斯曼
+                </div>
+                <div class="d_class">
+                    <span>类型：</span>恐怖片
+                </div>
+                <div class="d_Area">
+                    <span>地区：</span>大陆
+                    <span class="left">语言：</span>国语
+                </div>
+                <div class="d_time">
+                    <span>上映时间：</span>2019
+                    <span class="left">更新时间：</span>2019-03-01 12:12:30
+                </div>
+                <div>
+                    <button type="button" class="btn btn-success">立即播放</button>
+                </div>
+            </div>
+        </div>
+        <div class=" bg-light">
+            <div>
+                <ul class="nav" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#movie">播放线路</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " data-toggle="tab" href="#Content">剧情介绍</a>
+                    </li>
+                    @*<li class="nav-item">
+                            <a class="nav-link " data-toggle="tab" href="#home">Home</a>
+                        </li>*@
+                </ul>
+            </div>
+
+            <div class="tab-content">
+                <div id="movie" class="container tab-pane active">
+                    <div class="row">
+                        1
+                    </div>
+                </div>
+                <div id="Content" class="container tab-pane">
+                    <div class="row">2</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3 d-none d-lg-block">
+
+        </div>
+    </div>
+</div>
