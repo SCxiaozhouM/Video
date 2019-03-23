@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "";
 }
+
 <style>
     .row div {
         /*border:1px solid #000;*/
@@ -36,7 +37,7 @@
     .header_left {
         display: table-cell;
         vertical-align: top;
-        padding-left: 20px;
+        padding-left: 3%;
     }
 
     .left {
@@ -48,23 +49,226 @@
         margin-top: 30px;
     }
 
-    button {
+    .start {
         margin-top: 20px;
     }
 
-    li .active {
+    .nav-item .active {
         border: 0;
         background: none;
         border-bottom: 2px solid #09BB07;
         color: #09BB07;
     }
-    .nav-link{
-        color:#000;
+
+    .nav-link {
+        color: #000;
     }
-    ul {
+
+    .header_ul {
         border-bottom: 2px solid #eee;
     }
+
+    .nav-item a {
+        padding: 8px 0px;
+        margin-right: 32px;
+    }
+
+    .bg-light {
+        margin-top: 20px;
+    }
+
+    #Content {
+        margin-top: 20px;
+        font-size: 12px;
+    }
+
+    #accordion {
+        width: 100%;
+    }
+
+    .card-header {
+        background-color: white !important;
+        padding: 0.75rem 0rem;
+    }
+
+    .card-link:hover {
+        color: #000;
+    }
+
+    .card-link {
+        color: #000;
+        font-size: 14px;
+    }
+
+    .card-body a {
+        padding: 5px;
+        font-size: 12px;
+        text-align: center;
+        border-radius: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        white-space: nowrap;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+    }
+
+    .card-body li {
+        margin-bottom: 10px;
+    }
+    .d_ms{
+        color:#999;
+        font-size:12px !important;
+    }
+
+    @@media screen and (max-width: 768px) {
+        .header_div {
+            width: 40% !important;
+        }
+        .header_div a {
+            width: 100% !important;
+        }
+    }
 </style>
+<style>
+    .viode_header {
+        margin-top: 15px;
+        margin-bottom: 5px;
+        padding-left: 1%;
+    }
+
+    .row {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    .row_z div img {
+        width: 165px;
+        height: 180px;
+    }
+
+    .vide_a .play {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: -5px;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,.3) url("../../image/play.png") center no-repeat;
+    }
+
+    .vide_a:hover .play {
+        display: block;
+    }
+
+    .vide_a {
+        display: block;
+        position: relative;
+        padding-top: 130%;
+    }
+
+        .vide_a span {
+            left: 1%;
+            font-size: 12px;
+            color: #fff;
+            margin-left: 5px;
+        }
+
+    .viode_header a {
+        color: #999;
+    }
+
+    .viode_header .h3 {
+        color: #333;
+        font-size: 16px;
+    }
+
+    @@media screen and (max-width: 768px) {
+        [class*=col-] {
+            padding: 5px !important;
+        }
+    }
+
+    .col-xl-9 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .col-xl-3 {
+        padding-right: 0 !important;
+        padding-left: 8px;
+    }
+
+    .col-xs-1-5,
+    .col-sm-1-5,
+    .col-md-1-5,
+    .col-lg-1-5 {
+        position: relative;
+        min-height: 1px;
+        padding-right: 10px;
+        padding-left: 10px;
+        float: left;
+    }
+
+
+
+    @@media (min-width: 768px) {
+        .col-sm-1-5 {
+            max-width: 25%;
+        }
+    }
+
+    @@media (min-width: 1200px) {
+        .col-xl-2 {
+             flex:none !important; 
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .hidden-xs {
+            display: none !important;
+        }
+    }
+
+    @@media (min-width: 992px) {
+        .col-md-1-5, .col-sm-1-5 {
+            max-width: 20%;
+        }
+    }
+
+    @@media (min-width: 1199px) {
+        .col-md-1-5 {
+            max-width: 20%;
+        }
+
+        .col-sm-1-5 {
+            max-width: 20%;
+        }
+    }
+    .title {
+        font-size: 14px;
+        font-weight: 400;
+        margin-top: 7px;
+        display: inline-block;
+    }
+
+    .actor {
+        font-size: 14px;
+        color: #999;
+        margin-bottom: 10px;
+        display: inline-block;
+        margin-top: -3px;
+    }
+
+    .text-overflow {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+</style>
+
 <div class="row">
     <div class="col-lg-9">
 
@@ -80,55 +284,185 @@
                 <div class="d_name">
                     扶摇
                 </div>
-                <div class="d_actor">
+                <div class="d-sm-none d_ms">2019</div>
+                <div class="d-sm-none d_ms">大陆•国语•恐怖片</div>
+
+                <div class="d_actor d-none d-sm-block">
                     <span>主演：</span>萨布丽娜 科恩  卡罗琳·赫尼塞
                 </div>
-                <div class="d_director">
+                <div class="d_director d-none d-sm-block">
                     <span>导演：</span>达伦·林恩·鲍斯曼
                 </div>
-                <div class="d_class">
+                <div class="d_class d-none d-sm-block">
                     <span>类型：</span>恐怖片
                 </div>
-                <div class="d_Area">
+                <div class="d_Area d-none d-sm-block">
                     <span>地区：</span>大陆
                     <span class="left">语言：</span>国语
                 </div>
-                <div class="d_time">
+                <div class="d_time d-none d-sm-block">
                     <span>上映时间：</span>2019
-                    <span class="left">更新时间：</span>2019-03-01 12:12:30
+                    <span class="left text-overflow">更新时间：</span>2019-03-01 12:12:30
                 </div>
                 <div>
-                    <button type="button" class="btn btn-success">立即播放</button>
+                    <button type="button" class="start btn btn-success">立即播放</button>
                 </div>
             </div>
         </div>
-        <div class=" bg-light">
+        <div class="bg-light">
             <div>
-                <ul class="nav" role="tablist">
+                <ul class="nav header_ul" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#movie">播放线路</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " data-toggle="tab" href="#Content">剧情介绍</a>
                     </li>
-                    @*<li class="nav-item">
-                            <a class="nav-link " data-toggle="tab" href="#home">Home</a>
-                        </li>*@
                 </ul>
             </div>
 
             <div class="tab-content">
                 <div id="movie" class="container tab-pane active">
                     <div class="row">
-                        1
+                        <div id="accordion">
+                            <div>
+                                <div class="card-header">
+                                    <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                                        云播Z
+                                    </a>
+                                </div>
+                                <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <ul class="nav">
+                                            <li><a>TC精校中字版</a></li>
+                                            <li><a>TC国语无字版</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="card-header">
+                                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                                        云播Y
+                                    </a>
+                                </div>
+                                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <ul class="nav">
+                                            <li><a>TC精校中字版</a></li>
+                                            <li><a>TC国语无字版</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="card-header">
+                                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                                        云播M
+                                    </a>
+                                </div>
+                                <div id="collapseThree" class="collapse" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <ul class="nav">
+                                            <li><a>TC精校中字版</a></li>
+                                            <li><a>TC国语无字版</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div id="Content" class="container tab-pane">
-                    <div class="row">2</div>
+                    <div class="row">Hulu正式预订真实罪案诗选剧《恶行 The Act》，该剧由Nick Antosca（《零异频道 Channel Zero》主创）和Michelle Dean创作﹑首季由Laure de Clermont-Tonnerre负责执导。本剧的每一季都将聚焦于一起特殊的案件，首季将根据Michelle Dean在Buzzfeed上发表的真实故事文章《Dee Dee Wanted Her Daughter To Be Sick, Gypsy Wanted Her Mom To Be Murdered》改编，这讲述了48岁单亲妈妈Dee Dee Blanchard跟周遭人说自己的女儿Gypsy患了多种重疾（例如脑损伤而失智﹑白血病﹑哮喘等），但实际上没人知道，Gypsy根本是个健康得不得了的成人；后来Dee Dee身中多刀死亡，她的邻居们﹑亲人及警方发现是被虐待的Gypsy说服她男友杀害了母亲。Patricia Arquette饰演母亲Dee Dee，在外人眼中她是完美母亲；为了照顾「重疾」女儿Gypsy她历尽艰苦，还曾无家可归及经历卡特里娜飓风，所以在密苏里州的Springfield社区中，Dee Dee可谓是榜样。Joey King饰演被限制在轮椅上的Gypsy，正试图反抗母亲。Chloë Sevigny饰演领导社区女性的Mel，有着艰苦生活的她很同情Dee Dee，但当她发现真相时只能目瞪口呆﹑AnnaSophia Robb饰演Mel的女儿Lacey，她像母亲一般受社区欢迎，不过她想法上相对较理想主义。Lacey很快被Dee Dee及Gypsy所吸引，并想帮助她们。Calum Worthy饰演Nick，Gypsy在基督教约会网遇到他。Michelle Dean的文章在Buzzfeed上迅速走红，自发布起获得了超400万的阅读量，被Longform列入2016年十大网文。</div>
                 </div>
             </div>
 
         </div>
+        <div class="new">
+            <div class="viode_header"><span class="h3">最近更新</span><span class="float-right"><a href="#">更多>></a></span></div>
+            <div class="row z_row">
+                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
+                    <!---col-md-1-5-->
+                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <span class="play hidden-xs"></span>
+                        <span class="note textbg">更新至15集</span>
+                    </a>
+                    <div class="xia">
+                        <span class="title text-overflow"><a href="#">不吉波普不笑</a></span>
+                        <span class="actor text-overflow d-none d-md-block">萨布丽娜 科恩 卡罗琳·赫尼塞</span>
+                    </div>
+                </div>
+                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
+                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <span class="play hidden-xs"></span>
+                        <span class="note textbg">更新至15集</span>
+                    </a>
+                </div>
+                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
+                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <span class="play hidden-xs"></span>
+                        <span class="note textbg">更新至15集</span>
+                    </a>
+                </div>
+                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
+                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <span class="play hidden-xs"></span>
+                        <span class="note textbg">更新至15集</span>
+                    </a>
+                </div>
+                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
+                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <span class="play hidden-xs"></span>
+                        <span class="note textbg">更新至15集</span>
+                    </a>
+                </div>
+                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
+                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <span class="play hidden-xs"></span>
+                        <span class="note textbg">更新至15集</span>
+                    </a>
+                </div>
+                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
+                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <span class="play hidden-xs"></span>
+                        <span class="note textbg">更新至15集</span>
+                    </a>
+                </div>
+                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
+                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <span class="play hidden-xs"></span>
+                        <span class="note textbg">更新至15集</span>
+                    </a>
+                </div>
+                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
+                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <span class="play hidden-xs"></span>
+                        <span class="note textbg">更新至15集</span>
+                    </a>
+                </div>
+                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
+                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <span class="play hidden-xs"></span>
+                        <span class="note textbg">更新至15集</span>
+                    </a>
+                </div>
+                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4  d-lg-none">
+                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <span class="play hidden-xs"></span>
+                        <span class="note textbg">更新至15集</span>
+                    </a>
+                </div>
+                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4  d-lg-none">
+                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <span class="play hidden-xs"></span>
+                        <span class="note textbg">更新至15集</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
         <div class="col-lg-3 d-none d-lg-block">
 
         </div>
