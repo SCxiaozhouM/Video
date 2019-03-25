@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "";
 }
-
+@model Code.EntityFramework.Entity.mac_vod
 <style>
     .row div {
         /*border:1px solid #000;*/
@@ -29,15 +29,17 @@
         right: 3px;
     }
 
-    .header_left div {
+    .header_left .d-none {
         font-size: 14px;
         margin-top: 10px;
+        width: 100%;
     }
 
     .header_left {
         display: table-cell;
         vertical-align: top;
-        padding-left: 3%;
+        width: 100%;
+        padding-left: 2%;
     }
 
     .left {
@@ -46,7 +48,6 @@
 
     .d_name {
         font-size: 18px !important;
-        margin-top: 30px;
     }
 
     .start {
@@ -116,18 +117,30 @@
     .card-body li {
         margin-bottom: 10px;
     }
-    .d_ms{
-        color:#999;
-        font-size:12px !important;
+
+    .d_ms {
+        color: #999;
+        font-size: 12px !important;
     }
 
     @@media screen and (max-width: 768px) {
         .header_div {
             width: 40% !important;
         }
-        .header_div a {
-            width: 100% !important;
+
+            .header_div a {
+                width: 100% !important;
+            }
+        #video_iframe, #videoPlayer {
+            height: 20%;
         }
+    }
+    #videoPlayer {
+        height: 50%;
+    }
+    .video-js{
+        height:100%!important;
+        width:100% !important;
     }
 </style>
 <style>
@@ -221,7 +234,7 @@
 
     @@media (min-width: 1200px) {
         .col-xl-2 {
-             flex:none !important; 
+            flex: none !important;
         }
     }
 
@@ -239,13 +252,14 @@
 
     @@media (min-width: 1199px) {
         .col-md-1-5 {
-            max-width: 20%;
+            max-width: 16.66669%;/*20%*/
         }
 
         .col-sm-1-5 {
             max-width: 20%;
         }
     }
+
     .title {
         font-size: 14px;
         font-weight: 400;
@@ -267,48 +281,47 @@
         text-overflow: ellipsis;
         width: 100%;
     }
+    .bf{
+        margin-top:10px;
+    }
+    .bf span{
+        font-size:12px;
+    }
+        .bf .title{
+            color:#999;
+          
+        }
+            .bf .title + span {
+                margin-right: 10px;
+            }
+    .d_time span:nth-child(2)
+    {
+        margin-right:10px;
+    }
+    .d_Area div{
+        width:15%;
+        display:inline-block;
+    }
+    .d_time div {
+        width: 15% ;
+        display:inline-block;
+    }
+    .d_time div:last-child {
+        width: 30%;
+    }
 </style>
 
 <div class="row">
-    <div class="col-lg-9">
+    <div class="col-lg-12">
+        @if (ViewBag.Page == "play")
+        {
 
-        <div class="d_header">
-            <div class="header_div">
-                <a class="" href="#" title="">
-                    <img src="http://oss.liudehen.com/uploads/allimg/190321/129576f38b4f3441.jpg" />
-                    <span class="play hidden-xs"></span>
-                    <span class="textbg">HD</span>
-                </a>
-            </div>
-            <div class="header_left">
-                <div class="d_name">
-                    扶摇
-                </div>
-                <div class="d-sm-none d_ms">2019</div>
-                <div class="d-sm-none d_ms">大陆•国语•恐怖片</div>
-
-                <div class="d_actor d-none d-sm-block">
-                    <span>主演：</span>萨布丽娜 科恩  卡罗琳·赫尼塞
-                </div>
-                <div class="d_director d-none d-sm-block">
-                    <span>导演：</span>达伦·林恩·鲍斯曼
-                </div>
-                <div class="d_class d-none d-sm-block">
-                    <span>类型：</span>恐怖片
-                </div>
-                <div class="d_Area d-none d-sm-block">
-                    <span>地区：</span>大陆
-                    <span class="left">语言：</span>国语
-                </div>
-                <div class="d_time d-none d-sm-block">
-                    <span>上映时间：</span>2019
-                    <span class="left text-overflow">更新时间：</span>2019-03-01 12:12:30
-                </div>
-                <div>
-                    <button type="button" class="start btn btn-success">立即播放</button>
-                </div>
-            </div>
-        </div>
+            <partial name="Video_iframe" model="Model"/>
+        }
+        else
+        {
+            <partial name="Intro"/>
+        }
         <div class="bg-light">
             <div>
                 <ul class="nav header_ul" role="tablist">
@@ -316,65 +329,44 @@
                         <a class="nav-link active" data-toggle="tab" href="#movie">播放线路</a>
                     </li>
                     <li class="nav-item">
+
+
                         <a class="nav-link " data-toggle="tab" href="#Content">剧情介绍</a>
                     </li>
                 </ul>
             </div>
 
             <div class="tab-content">
-                <div id="movie" class="container tab-pane active">
+                <div id="movie" class="tab-pane active">
                     <div class="row">
                         <div id="accordion">
-                            <div>
-                                <div class="card-header">
-                                    <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                                        云播Z
-                                    </a>
-                                </div>
-                                <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <ul class="nav">
-                                            <li><a>TC精校中字版</a></li>
-                                            <li><a>TC国语无字版</a></li>
-                                        </ul>
+                            @{ int n = 0;}
+                            @foreach (var item in ViewBag.Path)
+                            {
+                                <div>
+                                    <div class="card-header">
+                                        <a class="card-link" data-toggle="collapse" href="#@("collapseOne"+n)">
+                                            @("云播" + n)
+                                        </a>
+                                    </div>
+                                    <div id="@("collapseOne"+n)" class="collapse show" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <ul class="nav">
+                                                @{ int i=0;}
+                                                @foreach (var url in item)
+                                                {
+                                                    <li><a href="/play/@Model.Vod_Id-@n-@(i).html">@url.Key</a></li>
+                                                }
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
-                                <div class="card-header">
-                                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-                                        云播Y
-                                    </a>
-                                </div>
-                                <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <ul class="nav">
-                                            <li><a>TC精校中字版</a></li>
-                                            <li><a>TC国语无字版</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="card-header">
-                                    <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
-                                        云播M
-                                    </a>
-                                </div>
-                                <div id="collapseThree" class="collapse" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <ul class="nav">
-                                            <li><a>TC精校中字版</a></li>
-                                            <li><a>TC国语无字版</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            }
                         </div>
                     </div>
                 </div>
                 <div id="Content" class="container tab-pane">
-                    <div class="row">Hulu正式预订真实罪案诗选剧《恶行 The Act》，该剧由Nick Antosca（《零异频道 Channel Zero》主创）和Michelle Dean创作﹑首季由Laure de Clermont-Tonnerre负责执导。本剧的每一季都将聚焦于一起特殊的案件，首季将根据Michelle Dean在Buzzfeed上发表的真实故事文章《Dee Dee Wanted Her Daughter To Be Sick, Gypsy Wanted Her Mom To Be Murdered》改编，这讲述了48岁单亲妈妈Dee Dee Blanchard跟周遭人说自己的女儿Gypsy患了多种重疾（例如脑损伤而失智﹑白血病﹑哮喘等），但实际上没人知道，Gypsy根本是个健康得不得了的成人；后来Dee Dee身中多刀死亡，她的邻居们﹑亲人及警方发现是被虐待的Gypsy说服她男友杀害了母亲。Patricia Arquette饰演母亲Dee Dee，在外人眼中她是完美母亲；为了照顾「重疾」女儿Gypsy她历尽艰苦，还曾无家可归及经历卡特里娜飓风，所以在密苏里州的Springfield社区中，Dee Dee可谓是榜样。Joey King饰演被限制在轮椅上的Gypsy，正试图反抗母亲。Chloë Sevigny饰演领导社区女性的Mel，有着艰苦生活的她很同情Dee Dee，但当她发现真相时只能目瞪口呆﹑AnnaSophia Robb饰演Mel的女儿Lacey，她像母亲一般受社区欢迎，不过她想法上相对较理想主义。Lacey很快被Dee Dee及Gypsy所吸引，并想帮助她们。Calum Worthy饰演Nick，Gypsy在基督教约会网遇到他。Michelle Dean的文章在Buzzfeed上迅速走红，自发布起获得了超400万的阅读量，被Longform列入2016年十大网文。</div>
+                    <div class="row">@Html.Raw(Model.Vod_Content)</div>
                 </div>
             </div>
 
@@ -387,6 +379,7 @@
                     <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
                         <span class="play hidden-xs"></span>
                         <span class="note textbg">更新至15集</span>
+
                     </a>
                     <div class="xia">
                         <span class="title text-overflow"><a href="#">不吉波普不笑</a></span>
@@ -459,12 +452,25 @@
                         <span class="note textbg">更新至15集</span>
                     </a>
                 </div>
-
+                @* ------------- *@
+                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4  d-none d-xl-block">
+                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <span class="play hidden-xs"></span>
+                        <span class="note textbg">更新至15集</span>
+                    </a>
+                </div>
+                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4 d-none d-xl-block">
+                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <span class="play hidden-xs"></span>
+                        <span class="note textbg">更新至15集</span>
+                    </a>
+                </div>
+                @* ------------- *@
             </div>
         </div>
 
-        <div class="col-lg-3 d-none d-lg-block">
+        @*<div class="col-lg-3 d-none d-lg-block">
 
-        </div>
+        </div>*@
     </div>
 </div>

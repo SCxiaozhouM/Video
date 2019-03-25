@@ -11,7 +11,7 @@ namespace Code
 {
     public class LegacyRoute : IRouter
     {
-        private readonly string[] _urls = new string[] { "dianying", "dongman", "dsj", "zongyi", "play" };
+        private readonly string[] _urls = new string[] { "dianying", "dongman", "lianxuju","dsj", "zongyi", "play" };
         private readonly IRouter _mvcRoute;
         public LegacyRoute(IServiceProvider services, params string[] urls)
         {
@@ -45,10 +45,16 @@ namespace Code
                 if (split.Length == 3)
                 {
                     context.RouteData.Values["controller"] = "Home";
-                    context.RouteData.Values["action"] = "Privacy";
-                    //context.RouteData.Values["type"] = type;
-                    //context.RouteData.Values["category"] = split[1];
+                    context.RouteData.Values["action"] = "Detail";
+                    context.RouteData.Values["page"] = type;
+                    context.RouteData.Values["category"] = split[1];
                     context.RouteData.Values["movieId"] = split[2];
+                }else if(split.Length == 2&&type=="play")
+                {
+                    context.RouteData.Values["controller"] = "Home";
+                    context.RouteData.Values["action"] = "Detail";
+                    context.RouteData.Values["page"] = type;
+                    context.RouteData.Values["movieId"] = split[1];
                 }
             }
             //if(secoend)

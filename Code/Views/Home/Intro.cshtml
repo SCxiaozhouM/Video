@@ -1,0 +1,57 @@
+﻿
+@{
+    Layout = null;
+}
+@model Code.EntityFramework.Entity.mac_vod
+
+<div class="d_header">
+    <div class="header_div">
+        <a class="" href="#" title="">
+            <img src="@Model.Vod_Pic" />
+            <span class="play hidden-xs"></span>
+            <span class="textbg">HD</span>
+        </a>
+    </div>
+    <div class="header_left">
+        <div class="d_name">
+            @Model.Vod_Name
+        </div>
+        <div class="d-sm-none d_ms">@Model.Vod_Year</div>
+        <div class="d-sm-none d_ms">@Model.Vod_Area•@Model.Vod_lang•@Model.Vod_Class</div>
+
+        <div class="d_actor d-none d-sm-block">
+            <span>主演：</span><span>@Model.Vod_Actor</span>
+        </div>
+        <div class="d_director d-none d-sm-block">
+            <span>导演：</span><span>@Model.Vod_Director</span>
+        </div>
+        <div class="d_class d-none d-sm-block">
+            <span>类型：</span><span>@Model.Vod_Class</span>
+        </div>
+        <div class="d_Area d-none d-sm-block">
+            <div>
+                <span>地区：</span>
+                <span>
+                    @Model.Vod_Area
+                </span>
+            </div>
+            <div>
+                <span class="left">语言：</span><span>@Model.Vod_lang</span>
+            </div>
+        </div>
+        <div class="d_time d-none d-sm-block">
+            <div>
+                <span>上映时间：</span>
+                <span>
+                    @Model.Vod_Year
+                </span>
+            </div>
+            <div>
+                <span>更新时间：</span><span> @Model.Vod_Time_Add</span>
+            </div>
+        </div>
+        <div>
+            <a href="/play/@Model.Vod_Id-0-0.html" class="start btn btn-success">立即播放</a>
+        </div>
+    </div>
+</div>
