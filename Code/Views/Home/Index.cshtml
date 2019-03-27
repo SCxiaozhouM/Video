@@ -228,28 +228,26 @@
 
         @for (int i = 0; i < 10; i++)
         {
-
             var clas = i > 5 && i <= 7 ? "d-none d-sm-block  d-xl-none" : i > 7 && i <= 9 ? "d-none d-lg-block d-xl-none" : "";
             var item = ViewBag.NewList[i];
-            var typep = (int)item.Type_Id;
+            //var typep = (int)item.Type_Id;
             <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4 @clas ">
-                @{
-                    var type = SugarBase.DB.Queryable<Code.EntityFramework.Entity.mac_type>().First(o => o.Type_Id == typep);
+                @*var type = SugarBase.DB.Queryable<Code.EntityFramework.Entity.mac_type>
+                    ().First(o => o.Type_Id == typep);
                     string en = type.Type_En;
                     if (type.type_Pid != 0)
                     {
-                        en = SugarBase.DB.Queryable<Code.EntityFramework.Entity.mac_type>().First(o => o.Type_Id == type.type_Pid).Type_En + "/" + en;
-                    }
+                    en = SugarBase.DB.Queryable<Code.EntityFramework.Entity.mac_type>
+                        ().First(o => o.Type_Id == type.type_Pid).Type_En + "/" + en;
+                        }
 
-                    en = "/" + en + "/" + item.Vod_Id + ".html";
-                }
-
-                <a class="vide_a lazy" href="@en" title="@item.Vod_Name" data-original="@item.Vod_Pic" style="background: url(&quot;@item.Vod_Pic&quot;) 50% 50% / cover no-repeat; display: block;">
+                        en = "/" + en + "/" + item.Vod_Id + ".html";*@
+                <a class="vide_a lazy" href="@item.Vod_Play_Url" title="@item.Vod_Name" data-original="@item.Vod_Pic" style="background: url(&quot;@item.Vod_Pic&quot;) 50% 50% / cover no-repeat; display: block;">
                     <span class="play hidden-xs"></span>
                     <span class="note textbg">@item.Vod_Remarks</span>
                 </a>
                 <div class="xia">
-                    <span class="title text-overflow"><a href="@en">@item.Vod_Name</a></span>
+                    <span class="title text-overflow"><a href="@item.Vod_Play_Url">@item.Vod_Name</a></span>
                     <span class="actor text-overflow d-none d-md-block">@item.Vod_Actor</span>
                 </div>
             </div>
@@ -271,23 +269,23 @@
                 @foreach (var movie in item.Value.list)
                 {
                     var clas = n > 9 ? "d-block d-lg-none" : "";
-                    var typep = (int)movie.Type_Id;
-                    var type = SugarBase.DB.Queryable<Code.EntityFramework.Entity.mac_type>().First(o => o.Type_Id == typep);
-                    string en = type.Type_En;
-                    if (type.type_Pid != 0)
-                    {
-                        en = SugarBase.DB.Queryable<Code.EntityFramework.Entity.mac_type>().First(o => o.Type_Id == type.type_Pid).Type_En + "/" + en;
-                    }
+                    //var typep = (int)movie.Type_Id;
+                    //var type = SugarBase.DB.Queryable<Code.EntityFramework.Entity.mac_type>().First(o => o.Type_Id == typep);
+                    //string en = type.Type_En;
+                    //if (type.type_Pid != 0)
+                    //{
+                    //    en = SugarBase.DB.Queryable<Code.EntityFramework.Entity.mac_type>().First(o => o.Type_Id == type.type_Pid).Type_En + "/" + en;
+                    //}
 
-                    en = "/" + en + "/" + movie.Vod_Id + ".html";
+                    //en = "/" + en + "/" + movie.Vod_Id + ".html";
                     <div class="col-sm-1-5 col-sm-3 col-xl-2 col-xs-4 @clas">
                         <!---col-md-1-5-->
-                        <a class="vide_a lazy" href="@en" title="不吉波普不笑" data-original="@movie.Vod_Pic" style="background: url(&quot;@movie.Vod_Pic&quot;) 50% 50% / cover no-repeat; display: block;">
+                        <a class="vide_a lazy" href="@movie.Vod_Play_Url" title="不吉波普不笑" data-original="@movie.Vod_Pic" style="background: url(&quot;@movie.Vod_Pic&quot;) 50% 50% / cover no-repeat; display: block;">
                             <span class="play hidden-xs"></span>
                             <span class="note textbg text-overflow">@movie.Vod_Remarks</span>
                         </a>
                         <div class="xia">
-                            <span class="title text-overflow"><a href="@en">@movie.Vod_Name</a></span>
+                            <span class="title text-overflow"><a href="@movie.Vod_Play_Url">@movie.Vod_Name</a></span>
                             <span class="actor text-overflow d-none d-md-block">@(movie.Vod_Actor != "" ? movie.Vod_Actor : "#")</span>
                         </div>
                     </div>

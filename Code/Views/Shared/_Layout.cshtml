@@ -27,9 +27,14 @@
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Code</a>
                 <div class="float-right position-absolute search_div ">
                     <form class="float-left input-group-sm">
-                        <input class="" /> <button type="button" class="btn btn-default" aria-label="Left Align">
+                        <input class="" onBlur="search_over()" oninput="chang(this)" onFocus="search(this)" /> <button type="button" class="btn btn-default" aria-label="Left Align">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                         </button>
+                        <div class="search_result">
+                            <ul id="search_res">
+                               
+                            </ul>
+                        </div>
                     </form>
                     <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -94,4 +99,29 @@
     $("#view_pager").carousel({
         interval: 2000
     });
+    function search(_this) {
+        $(".search_result").css("display", "block")
+    }
+    function chang(_this) {
+        $.ajax({
+            url: "/home/Search",
+            data: {
+                query: $(_this).val()
+            },
+            success: function (res) {
+                var _thi = $("#search_res");
+                _thi.children().remove();
+                if (res.code == 1) {
+                    var data = res.data;
+
+                    for (var i = 0; i < data.length; i++) {
+                        _thi.append("<li><a href='" + data[i].vod_Play_Url+"'>" + data[i].vod_Name + "</a></li>")
+                    }
+                }
+            }
+        })
+    }
+    function search_over() {
+        setTimeout(function () { $(".search_result").css("display", "none")},1000)
+    }
 </script>

@@ -131,16 +131,19 @@
             .header_div a {
                 width: 100% !important;
             }
+
         #video_iframe, #videoPlayer {
-            height: 20%;
+            height: 15rem !important;
         }
     }
-    #videoPlayer {
-        height: 50%;
+
+    #video_iframe, #videoPlayer {
+        height: 25rem;
     }
-    .video-js{
-        height:100%!important;
-        width:100% !important;
+
+    .video-js {
+        height: 100% !important;
+        width: 100% !important;
     }
 </style>
 <style>
@@ -252,7 +255,7 @@
 
     @@media (min-width: 1199px) {
         .col-md-1-5 {
-            max-width: 16.66669%;/*20%*/
+            max-width: 16.66669%; /*20%*/
         }
 
         .col-sm-1-5 {
@@ -281,34 +284,48 @@
         text-overflow: ellipsis;
         width: 100%;
     }
-    .bf{
-        margin-top:10px;
+
+    .bf {
+        margin-top: 10px;
     }
-    .bf span{
-        font-size:12px;
-    }
-        .bf .title{
-            color:#999;
-          
+
+        .bf span {
+            font-size: 12px;
         }
+
+        .bf .title {
+            color: #999;
+        }
+
             .bf .title + span {
                 margin-right: 10px;
             }
-    .d_time span:nth-child(2)
-    {
-        margin-right:10px;
+
+    .d_time span:nth-child(2) {
+        margin-right: 10px;
     }
-    .d_Area div{
-        width:15%;
-        display:inline-block;
+
+    .d_Area div {
+        width: 15%;
+        display: inline-block;
     }
+
     .d_time div {
-        width: 15% ;
-        display:inline-block;
+        width: 15%;
+        display: inline-block;
     }
-    .d_time div:last-child {
-        width: 30%;
+
+        .d_time div:last-child {
+            width: 30%;
+        }
+
+    .card-body {
+        padding-left: 0px !important;
     }
+
+        .card-body a {
+            color: #000;
+        }
 </style>
 
 <div class="row">
@@ -316,11 +333,11 @@
         @if (ViewBag.Page == "play")
         {
 
-            <partial name="Video_iframe" model="Model"/>
+            <partial name="Video_iframe" model="Model" />
         }
         else
         {
-            <partial name="Intro"/>
+            <partial name="Intro" model="Model" />
         }
         <div class="bg-light">
             <div>
@@ -345,18 +362,20 @@
                             {
                                 <div>
                                     <div class="card-header">
-                                        <a class="card-link" data-toggle="collapse" href="#@("collapseOne"+n)">
+                                        <a class="card-link" data-toggle="collapse" href="#@("collapseOne" + n)">
                                             @("云播" + n)
                                         </a>
                                     </div>
-                                    <div id="@("collapseOne"+n)" class="collapse show" data-parent="#accordion">
+                                    <div id="@("collapseOne" + n)" class="collapse show" data-parent="#accordion">
                                         <div class="card-body">
                                             <ul class="nav">
-                                                @{ int i=0;}
+                                                @{ int i = 0;}
                                                 @foreach (var url in item)
                                                 {
                                                     <li><a href="/play/@Model.Vod_Id-@n-@(i).html">@url.Key</a></li>
+                                                    i++;
                                                 }
+                                                @{n++;}
                                             </ul>
                                         </div>
                                     </div>
@@ -372,105 +391,34 @@
 
         </div>
         <div class="new">
-            <div class="viode_header"><span class="h3">最近更新</span><span class="float-right"><a href="#">更多>></a></span></div>
+            <div class="viode_header"><span class="h3">猜你喜欢</span></div>
             <div class="row z_row">
-                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
-                    <!---col-md-1-5-->
-                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                        <span class="play hidden-xs"></span>
-                        <span class="note textbg">更新至15集</span>
 
-                    </a>
-                    <div class="xia">
-                        <span class="title text-overflow"><a href="#">不吉波普不笑</a></span>
-                        <span class="actor text-overflow d-none d-md-block">萨布丽娜 科恩 卡罗琳·赫尼塞</span>
+                @{ int q = 0;}
+                @foreach (var movie in ViewBag.TJ)
+                {
+                    
+                    var clas = q < 10 ? "" : q < 12 ? " d-lg-none" : "d-none d-xl-block";
+                    <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4 @clas">
+                        <!---col-md-1-5-->
+                        <a class="vide_a lazy" href="@movie.Vod_Play_Url" title="@movie.Vod_Name" data-original="@movie.Vod_Pic" style="background: url(&quot;@movie.Vod_Pic&quot;) 50% 50% / cover no-repeat; display: block;">
+                            <span class="play hidden-xs"></span>
+                            <span class="note textbg">@movie.Vod_Remarks</span>
+                        </a>
+                        <div class="xia">
+                            <span class="title text-overflow"><a href="#">@movie.Vod_Name</a></span>
+                            <span class="actor text-overflow d-none d-md-block">@movie.Vod_Actor</span>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
-                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                        <span class="play hidden-xs"></span>
-                        <span class="note textbg">更新至15集</span>
-                    </a>
-                </div>
-                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
-                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                        <span class="play hidden-xs"></span>
-                        <span class="note textbg">更新至15集</span>
-                    </a>
-                </div>
-                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
-                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                        <span class="play hidden-xs"></span>
-                        <span class="note textbg">更新至15集</span>
-                    </a>
-                </div>
-                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
-                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                        <span class="play hidden-xs"></span>
-                        <span class="note textbg">更新至15集</span>
-                    </a>
-                </div>
-                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
-                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                        <span class="play hidden-xs"></span>
-                        <span class="note textbg">更新至15集</span>
-                    </a>
-                </div>
-                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
-                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                        <span class="play hidden-xs"></span>
-                        <span class="note textbg">更新至15集</span>
-                    </a>
-                </div>
-                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
-                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                        <span class="play hidden-xs"></span>
-                        <span class="note textbg">更新至15集</span>
-                    </a>
-                </div>
-                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
-                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                        <span class="play hidden-xs"></span>
-                        <span class="note textbg">更新至15集</span>
-                    </a>
-                </div>
-                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4">
-                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                        <span class="play hidden-xs"></span>
-                        <span class="note textbg">更新至15集</span>
-                    </a>
-                </div>
-                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4  d-lg-none">
-                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                        <span class="play hidden-xs"></span>
-                        <span class="note textbg">更新至15集</span>
-                    </a>
-                </div>
-                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4  d-lg-none">
-                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                        <span class="play hidden-xs"></span>
-                        <span class="note textbg">更新至15集</span>
-                    </a>
-                </div>
-                @* ------------- *@
-                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4  d-none d-xl-block">
-                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                        <span class="play hidden-xs"></span>
-                        <span class="note textbg">更新至15集</span>
-                    </a>
-                </div>
-                <div class="col-md-1-5 col-sm-3 col-xl-2 col-xs-4 d-none d-xl-block">
-                    <a class="vide_a lazy" href="/dm/41739/" title="不吉波普不笑" data-original="https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg" style="background: url(&quot;https://fxpic.img666.com:7777/uploads/allimg/190104/41ca3191d13a7d4e.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
-                        <span class="play hidden-xs"></span>
-                        <span class="note textbg">更新至15集</span>
-                    </a>
-                </div>
+                    q++;
+                }
+
                 @* ------------- *@
             </div>
         </div>
 
         @*<div class="col-lg-3 d-none d-lg-block">
 
-        </div>*@
+            </div>*@
     </div>
 </div>

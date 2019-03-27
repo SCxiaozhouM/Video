@@ -58,11 +58,11 @@ namespace Code
                       app.ApplicationServices));
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=index}/{id?}");
+                    template: "{controller=Home}/{action=Movies}/{id?}");
                 routes.MapRoute(
                     name: "dateil",
                     template: "{category}/{article}.html",
-                    defaults: new { controller = "Home", action = "Detail" }
+                    defaults: new { controller = "Home", action = "Movies" }
 
                     );
             });
