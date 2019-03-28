@@ -126,24 +126,51 @@ namespace Code.Controllers
             }
             return View(moiveModel);
         }
-        [Route("/Home/Search")]
-        public IActionResult Search(string query)
+
+       
+        public IActionResult SearchQuery(string query)
         {
             var dataList = SugarBase.DB.SqlQueryable<mac_vod>("select vod_id, type_id,type_id_1,vod_name from mac_vod  where Vod_Name like '%" + query + "%' or Vod_En like '%" + query + "%'").ToPageList(1, 5);/*.Where(o => o.Vod_Name.Contains(query) || o.Vod_En.Contains(query)).ToPageList(1,8);*/
             SetUrl(dataList);
             return Json(new { CODE = 1, DATA = dataList });
         }
-        public IActionResult Movies()
+        /// <summary>
+        /// 页
+        /// </summary>
+        /// <param name="pageIndex">当前页数</param>
+        /// <param name="category">分类</param>
+        /// <returns></returns>
+        public IActionResult Movies(string pageIndex, string category)
         {
-            var dataLists = SugarBase.DB.Queryable<mac_vod>().OrderBy(o => o.Vod_Time_Add, SqlSugar.OrderByType.Desc).ToPageList(1, 50).ToList();
+            if(category==null)
+            {
+                return Redirect("Error");
+            }
+            var ps = pageIndex.Split('_');
+            int index = 1;
+            if(ps.Count()==2)
+            {
+                index = Convert.ToInt32(ps[1]);
+            }
+            PageModel page = new PageModel();
+            var types = SugarBase.DB.Queryable<mac_type>().Where(o => o.Type_En == category).First();
+            var Sum = SugarBase.DB.Queryable<mac_vod>().Where(o => o.Type_Id == types.Type_Id || o.Type_Id_1 == types.Type_Id).Count();
+            page.Sum = Sum;
+            if (page.PageCount < index) index = page.PageCount;
+            var dataLists = SugarBase.DB.Queryable<mac_vod>().Where(o=>o.Type_Id==types.Type_Id|| o.Type_Id_1 == types.Type_Id).OrderBy(o => o.Vod_Time_Add, SqlSugar.OrderByType.Desc).ToPageList(index, page.PgaeSize).ToList();
+            page.PageIndex =index;
+            page.Category = category;
             SetUrl(dataLists);
             ViewBag.MovieList = dataLists;
-             
+            ViewBag.Page = page;
             return View();
         }
 
 
-
+        public IActionResult Search()
+        {
+            return View();
+        }
 
         /// <summary>
         /// 时间戳转为C#格式时间

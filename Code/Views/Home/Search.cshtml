@@ -1,0 +1,154 @@
+﻿@{
+    ViewData["Title"] = "";
+}
+@model Code.EntityFramework.Entity.mac_vod
+
+
+<style>
+    .search_header {
+        width: 100%;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        font-size: 14px;
+    }
+
+        .search_header div {
+            display: inline-block;
+            font-size: 16px;
+        }
+
+            .search_header div:nth-child(2) {
+                float: right;
+            }
+
+    .vide_a .play {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: -5px;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,.3) url("../../image/play.png") center no-repeat;
+    }
+
+    .vide_a:hover .play {
+        display: block;
+    }
+
+    .vide_a {
+        display: block;
+        position: relative;
+        padding-top: 123%;
+    }
+
+        .vide_a span {
+            left: 1%;
+            font-size: 12px;
+            color: #fff;
+            margin-left: 5px;
+        }
+
+    .div_right {
+        padding-left: 0px;
+        font-size: 14px;
+
+    }
+
+        .div_right div {
+            padding: 3px 0px;
+            color:#999;
+        }
+
+    .col-sm-2 {
+        -ms-flex: 0 0 16.666667%;
+        flex: 0 0 17.666667%;
+        max-width: 17.666667%;
+    }
+
+    .col-sm-10, .col-sm-2 {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .col-sm-10 {
+        padding: 0 1%;
+    }
+
+    /*.col-sm-10 {
+        flex: 0 0 77%;
+        max-width: 77%;
+    }*/
+
+    .list {
+        display: flex;
+    }
+
+    @@media (max-width: 1200px) {
+        .col-sm-9 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+    }
+
+    @@media(max-width:991px) {
+        .div_Blurb {
+            display: none;
+        }
+    }
+    @@media(max-width:768px) {
+        .col-sm-2 {
+            flex: 0 0 120px;
+            max-width: 120px;
+        }
+    }
+
+    @@media(max-width:567px) {
+        .col-sm-2 {
+            flex: 0 0 100px;
+            max-width: 100px;
+        }
+        .col-sm-10 {
+            font-size:13px;
+        }
+       
+        
+    }
+    .div_see {
+        position: absolute;
+        bottom: -5px;
+        right: 6px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-9">
+        <div class="search_header">
+            <div>搜索</div>
+            <div>
+                共有“304”部影片，当前第“1”页
+            </div>
+        </div>
+        <div class="list">
+            <div class="img_div col-sm-2 ">
+                <a class="vide_a lazy" href="#" title="xxx" data-original="http://oss.liudehen.com/uploads/allimg/190326/cdcc17fda120fa3b.jpg" style="background: url(&quot;http://oss.liudehen.com/uploads/allimg/190326/cdcc17fda120fa3b.jpg&quot;) 50% 50% / cover no-repeat; display: block;">
+                    <span class="play hidden-xs"></span>
+                    <span class="note textbg">HD</span>
+                </a>
+            </div>
+            <div class="div_right col-sm-10">
+                <h4 class="div_title">日本哪里好吃惊</h4>
+                <div class="div_director">导演：Chris Long,查尔斯·海德</div>
+                <div class="div_actor">主演：乔·曼特纳 托马斯·吉布森  </div>
+                <div class="div_class">类型：欧美剧</div>
+                <div class="div_Blurb">简介：故事发生在三个月之后，Morgan（去伦敦执行奥运会安保任务）和Garcia（帮助Prentiss搬入新家）从英国归来，发现身边多了一个人——长期在联邦调查局..</div>
+                <div class="div_see">查看详情 >></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3 d-none d-xl-block" style="border:1px solid #000;">
+
+    </div>
+</div>

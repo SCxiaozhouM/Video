@@ -4,32 +4,38 @@
 @model Code.EntityFramework.Entity.mac_vod
 
 <style>
-    .movies_header{
-        width:100%;
-       
+    .movies_header {
+        width: 100%;
     }
-    .movies_header div {
-        display: inline-block;
-    }
-    .movies_header div:nth-child(2) {
-        float: right;
-    }
+
+        .movies_header div {
+            display: inline-block;
+        }
+
+            .movies_header div:nth-child(2) {
+                float: right;
+            }
+
     .movies_class {
         width: 100%;
         border-bottom: 1px solid #eee;
         border-top: 1px solid #eee;
     }
-    .movies_class ul, span, li {
-        float: left;
-        list-style:none;
-        font-size:14px;
-    }
-    .movies_class ul {
-        padding-left: 10px;
-    }
-    .movies_class li {
-        padding-left: 10px;
-    }
+
+        .movies_class ul, span, li {
+            float: left;
+            list-style: none;
+            font-size: 14px;
+        }
+
+        .movies_class ul {
+            padding-left: 10px;
+        }
+
+        .movies_class li {
+            padding-left: 10px;
+        }
+
     .row {
         margin-right: 0px;
         margin-left: 0px;
@@ -82,11 +88,29 @@
             padding: 5px !important;
         }
     }
+
     .text-overflow {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         width: 100%;
+    }
+
+    .Page {
+        margin: 0px auto;
+        margin-top: 35px;
+    }
+    .page-link {
+        padding: 0.5rem 0.95rem;
+    }
+    .page-item:first-child .page-link {
+        height: 100%;
+    }
+    .page-item:nth-child(11) a{
+        height: 100%;
+    }
+    .active{
+        background:#eee;
     }
 </style>
 
@@ -162,5 +186,35 @@
             </div>
             i++;
         }
+       @* @ViewBag.Page*@
+        <nav class="Page" aria-label="Page navigation example">
+            <ul class="pagination">
+                @if (ViewBag.Page.PageIndex > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/@ViewBag.Page.Category/page_@(ViewBag.Page.PageIndex - 1).html" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                }
+                @{int num = ViewBag.Page.MinPage;}
+                @for (i = num; i <= ViewBag.Page.MaxPage; i++)
+                {
+                    string clas = i == ViewBag.Page.PageIndex ? "active" : "";
+                    <li class="page-item"><a class="page-link @clas" href="/@ViewBag.Page.Category/page_@(i).html">@i</a></li>
+                }
+                @if (ViewBag.Page.PageCount < ViewBag.Page.PageIndex)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/@ViewBag.Page.Category/page_@(ViewBag.Page.PageIndex + 1).html" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                }
+                <li class="page-item"><a class="page-link" href="/@ViewBag.Page.Category/page_@(ViewBag.Page.PageCount).html">尾页</a></li>
+            </ul>
+        </nav>
     </div>
 </div>
